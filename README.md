@@ -7,3 +7,7 @@ Permite crear un proyecto de Adobe Premiere Pro de manera automatica modificando
 Primero ingresamos el nombre del proyecto y la ruta donde deseamos guardarlo. 
 En Media Folder seleccionamos la carpeta base donde contenemos los clips a utiliar dentro del proyecto (este espacio se puede dejar vacio)
 Al dar Aceptar, se crea una carpeta con el nombre del proyecto y el archivo de extension .prproj de proyecto Premiere Pro
+
+### How to run?
+
+Abrir el archivo .bat dentro de la carpeta base del repository
