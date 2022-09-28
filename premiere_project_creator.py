@@ -3,6 +3,11 @@ import easygui as eg
 import subprocess
 import time
 import json
+import pathlib
+
+
+print(pathlib.Path().resolve())
+curr_dir = str(pathlib.Path().resolve())
 
 # Data to be written
 dictionary = {  "project_path": "",
@@ -14,12 +19,12 @@ json_object = json.dumps(dictionary, indent=4)
 
 # Opening JSON file
 try:
-    with open('settings.json', 'r') as readfile:
+    with open(curr_dir + '/' + 'settings.json', 'r') as readfile:
         settings_file = json.load(readfile)
 except:
-    with open("settings.json", "w") as outfile:
+    with open(curr_dir + "/" + "settings.json", "w") as outfile:
         outfile.write(json_object)
-    with open('settings.json', 'r') as readfile:
+    with open(curr_dir + '/' + 'settings.json', 'r') as readfile:
         settings_file = json.load(readfile)
 
  
@@ -36,7 +41,7 @@ if not box == None:
 
     json_object = json.dumps(dictionary, indent=4)
 
-    with open("settings.json", "w") as outfile:
+    with open(curr_dir + '/' + "settings.json", "w") as outfile:
         outfile.write(json_object)   
 
     # pasar string del nombre del proj como interfaz UI
