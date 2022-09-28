@@ -5,18 +5,41 @@ import subprocess
 import time
 import json
 
-settings = open('settings.txt', 'w')
-settings.writelines(['readme', 'settings'])
+# Data to be written
+dictionary = {  "project_path": "",
+                "media_folder": ""  }
+ 
+# Serializing json
+json_object = json.dumps(dictionary, indent=4)
 
+
+# Opening JSON file
+try:
+    with open('settings.json', 'r') as readfile:
+        settings_file = json.load(readfile)
+except:
+    with open("settings.json", "w") as outfile:
+        outfile.write(json_object)
+    with open('settings.json', 'r') as readfile:
+        settings_file = json.load(readfile)
+
+ 
 campos = ['Project Name', 'Project Path', 'Media Folder']
 
-default = ['',r'D:\TOBI-PC\Descargas\3-VIDEO PROJECTS',r'F:\VIDEO MEDIA\OBS VIDEOS']
+default = ['', settings_file["project_path"], settings_file["media_folder"]]
 
 # Creates a window with multiple input boxes
 box = eg.multenterbox(msg='Enter the proj name and path:',title='Premiere Pro Project Creator',fields=campos, values=default)
 
 if not box == None:
-    print(box)
+    dictionary = {  "project_path": box[1],
+                    "media_folder": box[2]  }
+
+    json_object = json.dumps(dictionary, indent=4)
+
+    with open("settings.json", "w") as outfile:
+        outfile.write(json_object)   
+
     # pasar string del nombre del proj como interfaz UI
     project_name = box[0]
 
@@ -31,9 +54,7 @@ if not box == None:
     with open(r'project_template.xml', mode='r',encoding='utf8') as f:
         for line in f.readlines(): # iterate thru the lines
             if replace_this in line: # check if is in ans in line
-                print(line)
                 line = line.replace(replace_this, project_name) # replace the line containing the and with the new line, you can change to what you want. 
-                print(line)
             lines.append(line)
 
 
@@ -41,8 +62,11 @@ if not box == None:
     with open(proj_dir +'/'+ project_name + '.prproj' , mode='w', encoding='utf8') as new_f:
         new_f.writelines(lines)
 
+    # open the project if Premiere pro is available
     time.sleep(0.5)
+    os.startfile(proj_dir +'/'+ project_name + '.prproj' )
 
     # open the media folders
+    time.sleep(0.5)
     subprocess.Popen(f'explorer "{box[2]}"')
-    os.startfile(proj_dir +'/'+ project_name + '.prproj' )
+
