@@ -1,14 +1,19 @@
 import os
 import easygui as eg
+import tkinter.messagebox
 import subprocess
 import time
+import json
+
+settings = open('settings.txt', 'w')
+settings.writelines(['readme', 'settings'])
 
 campos = ['Project Name', 'Project Path', 'Media Folder']
 
 default = ['',r'D:\TOBI-PC\Descargas\3-VIDEO PROJECTS',r'F:\VIDEO MEDIA\OBS VIDEOS']
 
-# creates a window with multiple input boxes
-box = eg.multenterbox(msg='Enter the proj name and path:',title='PremierePro Project Creator',fields=campos, values=default)
+# Creates a window with multiple input boxes
+box = eg.multenterbox(msg='Enter the proj name and path:',title='Premiere Pro Project Creator',fields=campos, values=default)
 
 if not box == None:
     print(box)
