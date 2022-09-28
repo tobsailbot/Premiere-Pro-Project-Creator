@@ -18,11 +18,12 @@ if not box == None:
     proj_dir = box[1] + f'\\{project_name}'
     replace_this = "proyecto_prueba"
     lines = []
-
+    
+    # Crea nueva carpeta
     os.makedirs(proj_dir)
 
-    #open file
-    with open(r'proyecto_testing_xd.xml', mode='r',encoding='utf8') as f:
+    #open file template
+    with open(r'project_template.xml', mode='r',encoding='utf8') as f:
         for line in f.readlines(): # iterate thru the lines
             if replace_this in line: # check if is in ans in line
                 print(line)
