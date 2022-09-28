@@ -1,6 +1,5 @@
 import os
 import easygui as eg
-import tkinter.messagebox
 import subprocess
 import time
 import json
